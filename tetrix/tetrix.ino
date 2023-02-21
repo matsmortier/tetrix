@@ -48,6 +48,8 @@
 #define FRAMEDELAY      750
 #define GAMEOVERDELAY   1500
 
+
+//inputs van de nunchuk
 #define LEFT            0
 #define RIGHT           1
 #define DOWN            2
@@ -58,19 +60,26 @@
 #define XCOORDINATE     0
 #define YCOORDINATE     1
  
-#define CLK             8
-#define OE              9
-#define LAT             10
-#define A               A0
-#define B               A1
-#define C               A2
+#define CLK             15
+#define OE              33
+#define LAT             32
+#define A               12
+#define B               16
+#define C               17
+//#define D               18
 
 RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
-ArduinoNunchuk controller = ArduinoNunchuk();
+//RGBmatrixPanel matrix(A, B, C, D ,CLK, LAT, OE, false);
+
+
+//ArduinoNunchuk controller = ArduinoNunchuk();
 // 32 rows, each row has 16 LEDs
+// bij ons 64 x 32 LED's
 // Every LED has 8 possible values (colors) so it can be stored in 3 bit (from 000 to 111)
 // We need 16 * 3 = 48 bit. An unsigned int contain 16 bits on Arduino, so we'll use 3 unsigned int
 unsigned int ledColorMatrix[32][3];
+//unsigned int ledColorMatrix[64][3];
+
 unsigned long long movementTime;
 unsigned int color;
 char pieceID;
@@ -92,7 +101,7 @@ char basePieceCoordinates[7][4][2] = {
 
 void setup() {
     matrix.begin();
-    controller.init();
+    //controller.init();
     randomSeed(analogRead(12));
     setupNewGame();
 }
